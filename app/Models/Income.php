@@ -13,4 +13,9 @@ class Income extends Model
         'notes',
         'date',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

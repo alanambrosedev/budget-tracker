@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use Illuminate\Support\Facades\Route; // <-- IMPORTANT: Add this line
+use App\Http\Controllers\IncomeController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', [DashboardController::class, 'index']); // <-- Use the Controller method
-
-// Remove the previous closure route if it's still there
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/summary', [DashboardController::class, 'summary'])->name('summary');
+    Route::resource('incomes', IncomeController::class);
+});
