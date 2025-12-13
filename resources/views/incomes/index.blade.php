@@ -1,33 +1,49 @@
-<h1>Your Income Entries</h1>
-<a href="{{ route('income.create') }}">Add new Income</a>
+@extends('layouts.app')
 
-@if ($incomes->isEmpty())
-    <p>You haven't recorded any income yet. Start tracking your funds!</p>
-@else
-    <table>
-        <thead>
-            <tr>
-                <th>Source</th>
-                <th>Amount</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($incomes as $income)
-                <tr>
-                    <td>{{ $income->source }}</td>
-                    <td>{{ number_format($income->amount, 10, 2) }}</td>
-                    <td>{{ $income->date }}</td>
-                    <td>
-                        <a href="{{ route('income.show', $income) }}">View</a>
-                        <a href="{{ route('income.edit', $income) }}">Edit</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <div>
-        {{ $incomes->links() }}
+@section('content')
+    <div class="container">
+        <h1 class="mb-4">Your Income Entries</h1>
+
+        <a href="{{ route('incomes.create') }}" class="btn btn-primary mb-3">Add New Income</a>
+
+        @if ($incomes->isEmpty())
+            <p class="text-muted">You haven't recorded any income yet. Start tracking your funds!</p>
+        @else
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($incomes as $income)
+                        <tr>
+                            <td>{{ $income->source }}</td>
+                            <td>{{ number_format($income->amount, 2) }}</td>
+                            <td>{{ $income->date->format('Y-m-d') }}</td>
+                            <td>
+                                <a href="{{ route('incomes.show', $income) }}" class="btn btn-sm btn-info">View</a>
+                                <a href="{{ route('incomes.edit', $income) }}" class="btn btn-sm btn-warning">Edit</a>
+                                <form action="{{ route('incomes.destroy', $income) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete this income?')">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            <div class="mt-3">
+                {{ $incomes->links() }}
+            </div>
+        @endif
     </div>
-@endif
+@endsection

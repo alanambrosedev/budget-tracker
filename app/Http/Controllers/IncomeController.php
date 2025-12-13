@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IncomeStoreRequest;
 use App\Models\Income;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,16 +26,13 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('incomes.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(IncomeStoreRequest $request) {}
 
     /**
      * Display the specified resource.

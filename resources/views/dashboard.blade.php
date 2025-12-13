@@ -1,45 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Budget Tracker Dashboard</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            padding: 20px;
-            background-color: #f8f8f8;
-        }
-
-        h1 {
-            color: #333;
-        }
-    </style>
-</head>
-
-<body>
-    <h1>{{ $title }}</h1>
-
-    <h2>Recent Income Entries</h2>
-    @if ($recentIncomes->isEmpty())
-        <p>No income entries found yet.</p>
-    @else
-        <ul>
-            @foreach ($recentIncomes as $income)
-                <li>
-                    **Source:** {{ $income->source }}
-                    **Amount:** {{ number_format($income->amount, 10, 2) }}
-                    **Date:** {{ $income->date }}
-                </li>
-            @endforeach
-        </ul>
-    @endif
-
-    @php
-        $currentYear = date('Y');
-    @endphp
-
-    <p>Current Year: {{ $currentYear }}</p>
-</body>
-
-</html>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    {{ __("You're logged in!") }}
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
