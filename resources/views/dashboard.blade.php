@@ -18,12 +18,23 @@
 </head>
 
 <body>
-    {{-- This is a Blade comment. The browser won't see it. --}}
-    <h1>{{ $title }}</h1> {{-- Blade syntax for echoing PHP variables --}}
+    <h1>{{ $title }}</h1>
 
-    <p>This is the start of your powerful new Budget Tracker application!</p>
+    <h2>Recent Income Entries</h2>
+    @if ($recentIncomes->isEmpty())
+        <p>No income entries found yet.</p>
+    @else
+        <ul>
+            @foreach ($recentIncomes as $income)
+                <li>
+                    **Source:** {{ $income->source }}
+                    **Amount:** {{ number_format($income->amount, 10, 2) }}
+                    **Date:** {{ $income->date }}
+                </li>
+            @endforeach
+        </ul>
+    @endif
 
-    {{-- Simple Blade directive for showing dynamic content --}}
     @php
         $currentYear = date('Y');
     @endphp
