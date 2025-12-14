@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Task;
 
 use App\Http\Controllers\Controller;
-use App\Models\Task;
 use Illuminate\Http\Request;
 
 class CompleteTaskController extends Controller
@@ -11,9 +10,8 @@ class CompleteTaskController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Task $task)
+    public function __invoke(Request $request)
     {
-        $task->markAsCompleted();
-        return back()->with('success', "Task '$task->title' marked as completed");
+        return response()->download(storage_path('exports/tasks.csv'));
     }
 }

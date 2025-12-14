@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class IncomeStoreRequest extends FormRequest
+class StoreTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,8 @@ class IncomeStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'source' => 'required|string|max:255',
-            'amount' => 'required|numeric|min:0.01',
-            'notes' => 'nullable|string',
-            'date' => 'required|date',
+            'title' => 'required|string|max:255',
+            'due_date' => 'nullable|date|after_or_equal:today',
         ];
     }
 }
