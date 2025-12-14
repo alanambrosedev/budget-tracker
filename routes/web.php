@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\TaskController;
+use App\Models\Task;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,9 +15,15 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
-
-
+Route::resource('tasks', TaskController::class);
+Route::fallback(function () {
+    return "Miantenance Mode On";
+});
+Route::scopeBindings()->group(function () {
+    Route::get('/users/{user}/tasks/{task}', function (User $user, Task $task) {
+        return $task;
+    });
+});
 Route::middleware(['auth'])->group(function () {
     Route::get('/summary', [DashboardController::class, 'summary'])->name('summary');
     Route::resource('incomes', IncomeController::class);
