@@ -42,7 +42,7 @@ class TaskController extends Controller
     {
         $task = Task::create($request->validated());
 
-        return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
+        return redirect()->route('admin.tasks.index')->with('success', 'Task created successfully.');
     }
 
     /**
@@ -77,6 +77,6 @@ class TaskController extends Controller
         $this->authorize('delete', $task);
         $task->delete();
 
-        return redirect()->route('tasks.index')->with('status', 'Task deleted successfully.');
+        return redirect()->route('admin.tasks.index')->with('status', 'Task deleted successfully.');
     }
 }
