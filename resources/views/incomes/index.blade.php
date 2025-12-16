@@ -21,7 +21,8 @@
                 <tbody>
                     @foreach ($incomes as $income)
                         <tr>
-                            <td>{{ $income->source }}</td>
+                            <td>{{ $income->source }}</td>  //safe
+                            <td>{{ !!$income->source!! }}</td>  //trust output safe
                             <td>{{ number_format($income->amount, 2) }}</td>
                             <td>{{ $income->date->format('Y-m-d') }}</td>
                             <td>
