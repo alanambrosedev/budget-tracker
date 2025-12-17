@@ -43,14 +43,17 @@
             </div>
 
             <!-- Submit -->
-            <div class="flex justify-end">
-                <button type="submit"
-                    class="px-4 py-2 bg-indigo-600 text-indigo font-semibold rounded-md
+            @can('create', $income)
+                <div class="flex justify-end">
+                    <button type="submit"
+                        class="px-4 py-2 bg-indigo-600 text-indigo font-semibold rounded-md
                            hover:bg-indigo-700 focus:outline-none focus:ring-2
                            focus:ring-offset-2 focus:ring-indigo-500">
-                    Save Income
-                </button>
-            </div>
+                        Save Income
+                    </button>
+                </div>
+            @endcan
+
         </form>
     </div>
 @endsection

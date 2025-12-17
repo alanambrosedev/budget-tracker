@@ -41,7 +41,13 @@
                     @endforeach
                 </tbody>
             </table>
-
+            @auth
+                <nav>Welcome, Boss! <a href="{{ route('admin.dashboard') }}">Admin Panel</a></nav>
+            @elseauth
+            <nav>Hello, {{ auth()->user()->name }}. <a href="{{ route('profile') }}">Settings</a></nav>
+            @elseguest
+            <nav>Please <a href="{{ route('login') }}">Login</a> to save your tasks.</nav>
+                @endauth
             <div class="mt-3">
                 {{ $incomes->links() }}
             </div>
