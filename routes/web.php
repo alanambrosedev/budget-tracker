@@ -3,7 +3,6 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TaskController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\Task;
 use App\Models\User;
@@ -48,4 +47,4 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
