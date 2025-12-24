@@ -8,7 +8,7 @@ class TaskService
 {
     public function getAllTasks()
     {
-        return Task::where('is_completed', false)->latest()->get();
+        return Task::with('user')->where('is_completed', false)->latest()->get();
     }
 
     public function deleteTask($id)
