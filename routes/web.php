@@ -20,6 +20,10 @@ Route::fallback(function () {
     return 'Miantenance Mode On';
 });
 
+Route::get('/users/{user}/tasks/{task}', function (User $user, Task $task) {
+    return $task->title;
+})->scopeBindings();
+
 Route::controller(DashboardController::class)->domain('app.example.com')->middleware(['auth', 'web'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', 'index')->name('dashboard');
     Route::resource('tasks')->only(['index', 'store']);
@@ -47,4 +51,4 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
