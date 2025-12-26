@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\Task;
 use App\Models\User;
@@ -23,11 +24,10 @@ Route::fallback(function () {
 Route::get('/users/{user}/tasks/{task}', function (User $user, Task $task) {
     return $task->title;
 })->scopeBindings();
-
-Route::controller(DashboardController::class)->domain('app.example.com')->middleware(['auth', 'web'])->prefix('admin')->name('admin.')->group(function () {
+Route::resource('user.incomes', IncomeController::class);
+Route::singleton(DashboardController::class)->domain('app.example.com')->middleware(['auth', 'web'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', 'index')->name('dashboard');
-    Route::resource('tasks')->only(['index', 'store']);
-});
+S});
 
 Route::scopeBindings()->group(function () {
     Route::get('/users/{user}/tasks/{task}', function (User $user, Task $task) {
@@ -51,4 +51,5 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::resource('tasks', TaskController::class)->only(['index', 'show']);
 require __DIR__ . '/auth.php';

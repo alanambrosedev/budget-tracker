@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Task;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
