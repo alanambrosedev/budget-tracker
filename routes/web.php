@@ -25,9 +25,10 @@ Route::get('/users/{user}/tasks/{task}', function (User $user, Task $task) {
     return $task->title;
 })->scopeBindings();
 Route::resource('user.incomes', IncomeController::class);
+
 Route::singleton(DashboardController::class)->domain('app.example.com')->middleware(['auth', 'web'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', 'index')->name('dashboard');
-S});
+});
 
 Route::scopeBindings()->group(function () {
     Route::get('/users/{user}/tasks/{task}', function (User $user, Task $task) {
