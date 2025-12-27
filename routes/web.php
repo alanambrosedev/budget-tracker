@@ -53,4 +53,4 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('tasks', TaskController::class)->only(['index', 'show']);
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

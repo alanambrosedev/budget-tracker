@@ -22,7 +22,8 @@ class IncomeStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'source' => 'required|string|max:255',
+            'source' => 'required|array',
+            'source.*' => 'required',
             'amount' => 'required|numeric|min:0.01',
             'notes' => 'nullable|string',
             'date' => 'required|date',
