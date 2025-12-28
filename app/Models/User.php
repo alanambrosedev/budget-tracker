@@ -4,7 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Attribute;
 use Dom\Comment;
+use Illuminate\Container\Attributes\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar_path',
     ];
 
     /**
@@ -61,5 +64,12 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    protected function avatarUrl()
+    {
+        return Attribute::get(function () {
+            return $this->avatar_path ? Storage::disk('public')->url($this->avatar_path) : asset('images/default-image.png');
+        });
     }
 }
