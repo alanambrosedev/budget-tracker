@@ -17,6 +17,7 @@ class IncomeController extends Controller
         $incomes = Auth::user()->incomes
             ->orderBy('date', 'desc')
             ->paginate(10);
+        $incomes->appends(['search' => 'price', 'sort' => 'desc']);
 
         return view('incomes.index', compact('incomes'));
     }

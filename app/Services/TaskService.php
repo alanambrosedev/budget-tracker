@@ -6,9 +6,13 @@ use App\Models\Task;
 
 class TaskService
 {
-    public function getAllTasks()
+    public function getAllTasks($request)
     {
-        return Task::with('user')->where('is_completed', false)->latest()->get();
+        return Task::query()
+            ->when($request->search, fn ($q) => $q->where('title', 'like', "%{$request->search}%"))
+            ->latest()
+            ->simplePaginate(15)
+            ->withQueryString();
     }
 
     public function deleteTask($id)
